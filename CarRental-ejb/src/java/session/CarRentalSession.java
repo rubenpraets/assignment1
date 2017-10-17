@@ -24,8 +24,14 @@ public class CarRentalSession implements CarRentalSessionRemote {
     public Quote createQuote(String clientName, Date start, Date end,
 			String carType, String region){
         ReservationConstraints constraints = new ReservationConstraints(start, end, carType, region);
+        Quote quote = null;
         for(CarRentalCompany crc: RentalStore.getRentals().values()){
-            Quote quote = crc.createQuote(constraints, clientName);
+            try{
+                quote = crc.createQuote(constraints, clientName);
+                break;
+            } catch(ReservationException e){
+                //do nothing
+            }
         }
         return quote;
     }
