@@ -10,7 +10,7 @@ import rental.*;
 public interface CarRentalSessionRemote {
 
     Set<String> getAllRentalCompanies();
-    Quote createQuote(String clientName, Date start, Date end,
+    void createQuote(String clientName, Date start, Date end,
 			String carType, String region);
     List<Quote> getCurrentQuotes();
     void confirmQuotes();
