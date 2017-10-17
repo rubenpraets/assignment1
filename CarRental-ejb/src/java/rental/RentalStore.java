@@ -24,6 +24,10 @@ public class RentalStore {
         return out;
     }
     
+    public static CarRentalCompany getRental(Quote quote){
+        return getRental(quote.getRentalCompany());
+    }
+    
     public static synchronized Map<String, CarRentalCompany> getRentals(){
         if(rentals == null){
             rentals = new HashMap<String, CarRentalCompany>();

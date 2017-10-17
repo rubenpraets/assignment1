@@ -13,6 +13,6 @@ public interface CarRentalSessionRemote {
     void createQuote(String clientName, Date start, Date end,
 			String carType, String region);
     List<Quote> getCurrentQuotes();
-    void confirmQuotes();
+    void confirmQuotes() throws ReservationException;
     
 }
