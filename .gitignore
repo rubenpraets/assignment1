@@ -1,10 +1,8 @@
 CarRental-client/nbproject/private/private.properties
-CarRental-client/nbproject/private/private.properties
-CarRental-client/nbproject/private/private.properties
-CarRental-client/nbproject/private/private.properties
-CarRental-client/nbproject/private/private.properties
 CarRental-client/nbproject/project.properties
 *.class
 CarRental-ejb/nbproject/ant-deploy.xml
-*.properties
 CarRental/nbproject/ant-deploy.xml
+CarRental-client/build/jar/client/Main.class
+CarRental-client/nbproject/ant-deploy.xml
+*.properties
