@@ -15,7 +15,7 @@ import rental.*;
  * @author Joris
  */
 @Stateless
-public class SessionManager implements SessionManagerRemote {
+public class ManagerSession implements ManagerSessionRemote {
 
     /**
      * 
@@ -24,17 +24,26 @@ public class SessionManager implements SessionManagerRemote {
      * @return An ArrayList containing all CarTypes 
      * in the given CarRentalCompany.
      */
+    @Override
     public List<CarType> getCarTypesForCompany(CarRentalCompany crc) {
         return new ArrayList(crc.getAllCarTypes());
     }
     
-    public int getNbReservations(CarType type, CarRentalCompany crc) {
+    @Override
+    public int getNbReservations(String typeString, String crcString) {
         int result = 0;
+        CarRentalCompany crc = RentalStore.getRental(crcString);
+        CarType type = crc.getType(typeString);
+        
         for (Car car: crc.getCars()){
             if (car.getType().equals(type)) {
                 result += car.getAllReservations().size();
             }        
         }
         return result;
+    }
+    
+    public String bestRenter(CarRentalCompany crc){
+        return crc.bestRenter();
     }
 }

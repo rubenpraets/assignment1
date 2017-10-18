@@ -1,5 +1,6 @@
 package rental;
 
+import static java.lang.Double.max;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
@@ -19,6 +20,7 @@ public class CarRentalCompany {
 	private String name;
 	private List<Car> cars;
 	private Map<String,CarType> carTypes;
+        private Set<String> renters = new HashSet<String>();
 
 	/***************
 	 * CONSTRUCTOR *
@@ -154,6 +156,7 @@ public class CarRentalCompany {
 		
 		Reservation res = new Reservation(quote, car.getId());
 		car.addReservation(res);
+                renters.add(quote.getCarRenter());
 		return res;
 	}
 
@@ -172,5 +175,26 @@ public class CarRentalCompany {
             }
         }
         return out;
+    }
+        
+    public Set<String> getRenters(){
+        return renters;
+    }
+                
+    public int getNbOfReservationsForRenter(String renter){
+        return getReservationsBy(renter).size();
+    }
+    
+    public String bestRenter(){
+        String bestRenter = null;
+        int nb = 0;
+        for(String renter: getRenters()){
+            int nb2 = getNbOfReservationsForRenter(renter);
+            if(nb2>nb){
+                bestRenter = renter;
+                nb=nb2;
+            }
+        }
+        return bestRenter;
     }
 }

@@ -7,3 +7,5 @@ CarRental-client/build/jar/client/Main.class
 CarRental-client/nbproject/ant-deploy.xml
 *.properties
 *.class
+CarRental-client/build/jar/client/Main.class
+CarRental-ejb/build/classes/rental/CarRentalCompany.class

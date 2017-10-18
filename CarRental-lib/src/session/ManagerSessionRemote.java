@@ -15,7 +15,7 @@ import rental.CarType;
  * @author Joris
  */
 @Remote
-public interface SessionManagerRemote {
+public interface ManagerSessionRemote {
     abstract List<CarType> getCarTypesForCompany(CarRentalCompany crc);
-    abstract int getNbReservations(CarType type, CarRentalCompany crc);
+    abstract int getNbReservations(String type, String crc);
 }

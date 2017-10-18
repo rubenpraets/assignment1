@@ -2,8 +2,10 @@ package session;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import javax.ejb.Stateful;
 import rental.*;
@@ -18,8 +20,12 @@ public class CarRentalSession implements CarRentalSessionRemote {
         return new HashSet<String>(RentalStore.getRentals().keySet());
     }
     
+    public Map<String,CarRentalCompany> getAllRentalCompaniesMap() {
+        return new HashMap<String,CarRentalCompany>(RentalStore.getRentals());
+    }
+    
     @Override
-    public void confirmQuotes() throws ReservationException{
+    public List<Reservation> confirmQuotes() throws ReservationException{
         List<Reservation> reservations = new ArrayList<Reservation>();
         List<Quote> quotes = getCurrentQuotes();
         try{
@@ -35,6 +41,7 @@ public class CarRentalSession implements CarRentalSessionRemote {
                 throw e;
             }
         }
+        return reservations;
     }
     
     @Override
@@ -64,6 +71,18 @@ public class CarRentalSession implements CarRentalSessionRemote {
 
     private void addQuote(Quote quote){
         getCurrentQuotes().add(quote);
+    }
+    
+    @Override
+    public void checkForAvailableCarTypes(Date start, Date end) throws Exception {
+        Map<String,CarRentalCompany> rentalCompanies = getAllRentalCompaniesMap();
+        Set<CarType> carTypes = new HashSet<CarType>();
+        for(CarRentalCompany crc: rentalCompanies.values()){
+            carTypes.addAll(crc.getAvailableCarTypes(start, end));
+        }
+        for(CarType c: carTypes){
+            System.out.println(c.toString());
+        }
     }
     
 }
