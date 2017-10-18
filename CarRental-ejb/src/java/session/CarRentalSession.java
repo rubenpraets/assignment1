@@ -19,19 +19,20 @@ public class CarRentalSession implements CarRentalSessionRemote {
     }
     
     @Override
-    public void confirmQuotes(){
+    public void confirmQuotes() throws ReservationException{
         List<Reservation> reservations = new ArrayList<Reservation>();
         List<Quote> quotes = getCurrentQuotes();
         try{
-            for (int i=0;i<quotes.size();i++){
-                Quote quote = quotes.get(i);
-                CarRentalCompany crc = RentalStore.getRental(quote.getRentalCompany());
+            for (Quote quote: quotes){
+                CarRentalCompany crc = RentalStore.getRental(quote);
                 Reservation reservation = crc.confirmQuote(quote);
                 reservations.add(reservation);
             }
         } catch(ReservationException e){
-            for(int i=0;i<reservations.size();i++){
-                //TODO afmaken!!!
+            for(Reservation reservation: reservations){
+                CarRentalCompany crc = RentalStore.getRental(reservation);
+                crc.cancelReservation(reservation);
+                throw e;
             }
         }
     }
