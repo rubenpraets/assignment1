@@ -1,1 +1,3 @@
-.CarRental/nbproject/private/private.properties
+.CarRental\nbproject\
+.CarRental-ejb\build
+.CarRental-client\build
