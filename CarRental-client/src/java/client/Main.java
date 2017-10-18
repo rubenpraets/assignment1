@@ -18,7 +18,9 @@ public class Main extends AbstractTestAgency{
 
     @Override
     protected Object getNewReservationSession(String name) throws Exception {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        InitialContext context = new InitialContext();
+        session = (<BeanInterface>) context.lookup(<BeanInterface>.class.getName());
+        return session;
     }
 
     @Override
