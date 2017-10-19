@@ -106,7 +106,7 @@ public abstract class AbstractTestAgency<ReservationSession, ManagerSession> ext
      *
      * @throws Exception if things go wrong, throw exception
      */
-    //protected abstract int getNumberOfReservationsBy(ManagerSession ms, String clientName) throws Exception;
+    protected abstract int getNumberOfReservationsBy(ManagerSession ms, String clientName) throws Exception;
 
     /**
      * Get the number of reservations for a particular car type.
@@ -168,12 +168,12 @@ public abstract class AbstractTestAgency<ReservationSession, ManagerSession> ext
                 assessTotalReservations(name, scriptLineTokens);
 			} catch (Exception e) { throw new ApplicationException(e); }
 		} else if (cmd.equals("BMR")){
-/*			try{
+			try{
 				ManagerSession aMgmtSession = getNewManagerSession("CarRent", name);
 	            System.out.println("Number of reservations by " + name + ":\t" + getNumberOfReservationsBy(aMgmtSession, name));
 	            System.out.println();
 			} catch (Exception e) { throw new ApplicationException(e); }
-*/
+
 		} else if (cmd.equals("BS")) {
             try {
             	sessions.put(name, getNewReservationSession(name));

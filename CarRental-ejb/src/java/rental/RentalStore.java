@@ -36,6 +36,14 @@ public class RentalStore {
         }
         return rentals;
     }
+    
+    public static int getNumberOfReservationsBy(String clientName){
+        int nb = 0;
+        for(CarRentalCompany crc: getRentals().values()){
+            nb += crc.getNbOfReservationsForRenter(clientName);
+        }
+        return nb;
+    }
 
     public static void loadRental(String datafile) {
         try {

@@ -27,9 +27,9 @@ public class CarRentalSession implements CarRentalSessionRemote {
     @Override
     public List<Reservation> confirmQuotes() throws ReservationException{
         List<Reservation> reservations = new ArrayList<Reservation>();
-        List<Quote> quotes = getCurrentQuotes();
+        
         try{
-            for (Quote quote: quotes){
+            for (Quote quote: getCurrentQuotes()){
                 CarRentalCompany crc = RentalStore.getRental(quote);
                 Reservation reservation = crc.confirmQuote(quote);
                 reservations.add(reservation);
@@ -46,7 +46,7 @@ public class CarRentalSession implements CarRentalSessionRemote {
     
     @Override
     public void createQuote(String clientName, Date start, Date end,
-			String carType, String region){
+			String carType, String region) throws Exception{
         ReservationConstraints constraints = new ReservationConstraints(start, end, carType, region);
         Quote quote = null;
         for(CarRentalCompany crc: RentalStore.getRentals().values()){
@@ -58,8 +58,9 @@ public class CarRentalSession implements CarRentalSessionRemote {
             }
         }
         if(quote == null){
-            System.out.println("Impossible demands!");
+            throw new ReservationException("Impossible demands!");
         } else {
+            System.out.println(quote);
             addQuote(quote);
         }
     }

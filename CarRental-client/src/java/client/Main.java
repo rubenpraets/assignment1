@@ -15,8 +15,10 @@ public class Main extends AbstractTestAgency{
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        System.out.println("found rental companies: "+session.getAllRentalCompanies());
+    public static void main(String[] args) throws Exception{
+        //System.out.println("found rental companies: "+session.getAllRentalCompanies());
+        Main main = new Main("simpleTrips");
+        main.run();
     }
 
     public Main(String scriptFile) {
@@ -58,5 +60,10 @@ public class Main extends AbstractTestAgency{
     @Override
     protected int getNumberOfReservationsForCarType(Object ms, String carRentalName, String carType) throws Exception {
         return ((ManagerSessionRemote)ms).getNbReservations(carType, carRentalName);
+    }
+
+    @Override
+    protected int getNumberOfReservationsBy(Object ms, String clientName) throws Exception {
+        return ((ManagerSessionRemote)ms).getNumberOfReservationsBy(clientName);
     }
 }

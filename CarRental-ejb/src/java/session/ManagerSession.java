@@ -46,4 +46,9 @@ public class ManagerSession implements ManagerSessionRemote {
     public String bestRenter(CarRentalCompany crc){
         return crc.bestRenter();
     }
+    
+    @Override
+    public int getNumberOfReservationsBy(String clientName){
+        return RentalStore.getNumberOfReservationsBy(clientName);
+    }
 }

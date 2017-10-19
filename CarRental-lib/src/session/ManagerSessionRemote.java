@@ -18,4 +18,5 @@ import rental.CarType;
 public interface ManagerSessionRemote {
     abstract List<CarType> getCarTypesForCompany(CarRentalCompany crc);
     abstract int getNbReservations(String type, String crc);
+    int getNumberOfReservationsBy(String clientName);
 }
